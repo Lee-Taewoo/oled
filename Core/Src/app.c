@@ -18,7 +18,18 @@ void app() {
 	ssd1306_Init();
 	ssd1306_Fill(0);
 	ssd1306_SetCursor(0, 0);
-	ssd1306_WriteString("Hello World", Font_11x18, 1);
+	ssd1306_WriteString("Hello World", Font_7x10, 1);
+	ssd1306_SetCursor(0, 10);
+	ssd1306_WriteString("1234567890", Font_7x10, 1);
 	ssd1306_UpdateScreen();
-	while(1);
+	ssd1306_SetContrast(255);
+	while(1) {
+		ssd1306_Fill(0);
+		static int x = 0;
+		ssd1306_Line(x, 0, x, 63, 1);
+		x++;
+		x %= 128;
+		ssd1306_UpdateScreen();
+		HAL_Delay(100);
+	}
 }
